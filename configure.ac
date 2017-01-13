@@ -84,7 +84,7 @@ case $host in
   *-*-linux* | *-android* )
     LINUX_HOST=true
     ;;
-  *-*-cygwin* )
+  *-*-cygwin* | *-*-mingw* )
     WINDOWS_HOST=true
     ;;
 esac

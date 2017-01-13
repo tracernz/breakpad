@@ -374,7 +374,8 @@ bin_PROGRAMS += \
 	src/tools/linux/symupload/sym_upload
 if X86_HOST
 bin_PROGRAMS += \
-	src/tools/mac/dump_syms/dump_syms_mac
+	src/tools/mac/dump_syms/dump_syms_mac \
+	src/tools/windows/dump_syms_dwarf/dump_syms_win
 endif
 endif
 endif LINUX_HOST
@@ -768,7 +769,6 @@ src_tools_linux_md2core_minidump_2_core_unittest_LDADD = \
 
 endif LINUX_HOST
 
-if WINDOWS_HOST
 if !DISABLE_TOOLS
 src_tools_windows_dump_syms_dwarf_dump_syms_SOURCES = \
 	src/common/dwarf_cfi_to_module.cc \
@@ -779,11 +779,26 @@ src_tools_windows_dump_syms_dwarf_dump_syms_SOURCES = \
 	src/common/dwarf/bytereader.cc \
 	src/common/dwarf/dwarf2diehandler.cc \
 	src/common/dwarf/dwarf2reader.cc \
+	src/common/dwarf/elf_reader.cc \
 	src/common/pecoff/dump_symbols.cc \
 	src/common/pecoff/pecoffutils.cc \
 	src/common/pecoff/pecoff_file_id.cc \
 	src/tools/windows/dump_syms_dwarf/dump_syms.cc
-endif
+
+src_tools_windows_dump_syms_dwarf_dump_syms_win_SOURCES = \
+	src/common/dwarf_cfi_to_module.cc \
+	src/common/dwarf_cu_to_module.cc \
+	src/common/dwarf_line_to_module.cc \
+	src/common/language.cc \
+	src/common/module.cc \
+	src/common/dwarf/bytereader.cc \
+	src/common/dwarf/dwarf2diehandler.cc \
+	src/common/dwarf/dwarf2reader.cc \
+	src/common/dwarf/elf_reader.cc \
+	src/common/pecoff/dump_symbols.cc \
+	src/common/pecoff/pecoffutils.cc \
+	src/common/pecoff/pecoff_file_id.cc \
+	src/tools/windows/dump_syms_dwarf/dump_syms.cc
 endif
 
 if !DISABLE_PROCESSOR

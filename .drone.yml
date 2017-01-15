@@ -1,0 +1,7 @@
+build:
+  image: teaci/cygwin32
+  shell: cygwin32
+  pull: true
+  commands:
+    - ./configure
+    - make

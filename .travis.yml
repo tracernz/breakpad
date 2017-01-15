@@ -5,25 +5,39 @@ language: cpp
 # Order here matters for implicit matrix generation and coverity scan.
 # See scripts/travis-build.sh for details.
 # TODO: add a clang build as well.
-compiler:
- - gcc
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-5
-      - g++-5
+
 # Travis sets CC/CXX to the system toolchain based on the `compiler`
 # selection. If clang is added, this should move to be set inside the
 # matrix.
-env:
-  matrix:
-    - USE_CC=gcc-5 USE_CXX=g++-5
+matrix:
+  include:
+    # linux build
+    - os: linux
+      dist: trusty
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-5
+            - g++-5
+      env: USE_CC=gcc-5 USE_CXX=g++-5
+    # mac build
+    - os: osx
+      osx_image: xcode7.2
+      before_install:
+        - brew update
+        - brew install binutils
+    # "windows" build
+    - os: linux
+      dist: trusty
+      addons:
+        apt:
+          packages:
+            - g++-mingw-w64-i686
+            - gcc-mingw-w64-i686
+            - binutils-mingw-w64-i686
+      env: USE_CC=i686-w64-mingw32-gcc USE_CXX=i686-w64-mingw32-g++ CONFIGURE_FLAGS='--build=x86_64-pc-linux-gnu --host=i686-w64-mingw32'
+
 before_install: ./scripts/travis-checkout.sh
 script: ./scripts/travis-build.sh
-
-# Order here matters; see compiler comment above.
-# TODO: add mac support
-os:
-  - linux

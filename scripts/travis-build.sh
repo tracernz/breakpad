@@ -64,7 +64,7 @@ main() {
 
   # Do scans last as they like to dirty the tree and some tests
   # expect a clean tree (like code style checks).
-  coverity_scan
+  #coverity_scan
 }
 
 main "$@"

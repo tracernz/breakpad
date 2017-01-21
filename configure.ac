@@ -84,8 +84,12 @@ case $host in
   *-*-linux* | *-android* )
     LINUX_HOST=true
     ;;
+  *-*-darwin* )
+    MAC_HOST=true
+    ;;
 esac
 AM_CONDITIONAL(LINUX_HOST, test x$LINUX_HOST = xtrue)
+AM_CONDITIONAL(MAC_HOST, test x$MAC_HOST = xtrue)
 
 # Only use Android support headers when compiling for Android
 case $host in

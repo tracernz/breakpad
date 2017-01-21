@@ -99,6 +99,17 @@ includecldir = $(includedir)/$(PACKAGE)/common/linux
 includecl_HEADERS = $(top_srcdir)/src/common/linux/*.h
 endif
 
+if MAC_HOST
+includeclhdir = $(includedir)/$(PACKAGE)/client/mac/handler
+includeclh_HEADERS = $(top_srcdir)/src/client/mac/handler/*.h
+
+includeclcdir = $(includedir)/$(PACKAGE)/client/mac/crash_generation
+includeclc_HEADERS = $(top_srcdir)/src/client/mac/crash_generation/*.h
+
+includecldir = $(includedir)/$(PACKAGE)/common/mac
+includecl_HEADERS = $(top_srcdir)/src/common/mac/*.h
+endif
+
 includegbcdir = $(includedir)/$(PACKAGE)/google_breakpad/common
 includegbc_HEADERS = $(top_srcdir)/src/google_breakpad/common/*.h
 

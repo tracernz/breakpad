@@ -4,11 +4,14 @@ Project {
     name: "tools_mac"
     condition: qbs.targetOS.contains("macos")
 
+    /* TODO: needs processor lib
     CppApplication {
         name: "crash_report"
 
         Depends { name: "default_cpp_app_config" }
         Depends { name: "breakpad_client" }
+
+        cpp.frameworks: ["Foundation"]
 
         files: [
             "crash_report/crash_report.mm",
@@ -20,7 +23,7 @@ Project {
             qbs.install: true
             qbs.installDir: "bin"
         }
-    }
+    }*/
 
     CppApplication {
         name: "dump_syms"
@@ -58,7 +61,12 @@ Project {
         Depends { name: "default_cpp_app_config" }
         Depends { name: "breakpad_client" }
 
-        files: "symupload/minidump_upload.m"
+        cpp.frameworks: ["Foundation"]
+
+        files: [
+            "../../common/mac/HTTPMultipartUpload.m",
+            "symupload/minidump_upload.m"
+        ]
 
         Group {
             fileTagsFilter: product.type
@@ -73,7 +81,12 @@ Project {
         Depends { name: "default_cpp_app_config" }
         Depends { name: "breakpad_client" }
 
-        files: "symupload/symupload.m"
+        cpp.frameworks: ["Foundation"]
+
+        files: [
+            "../../common/mac/HTTPMultipartUpload.m",
+            "symupload/symupload.m"
+        ]
 
         Group {
             fileTagsFilter: product.type

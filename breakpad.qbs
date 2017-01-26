@@ -48,17 +48,23 @@ Project {
         name: "default_cpp_config"
         Export {
             Depends { name: "cpp" }
-            cpp.includePaths: product.sourceDirectory + "/src"
             cpp.cxxLanguageVersion: "c++11"
+
+            property stringList commonIncludePaths: [product.sourceDirectory + "/src"]
+            property stringList commonDefines: []
 
             Properties {
                 condition: qbs.targetOS.contains("linux")
-                cpp.defines: ["HAVE_A_OUT_H", "HAVE_MACH_O_NLIST_H"]
+                cpp.includePaths: commonIncludePaths.concat([product.sourceDirectory + "/src/third_party/mac_headers"])
+                cpp.defines: commonDefines.concat(["HAVE_A_OUT_H", "HAVE_MACH_O_NLIST_H"])
             }
             Properties {
                 condition: qbs.targetOS.contains("macos")
-                cpp.defines: ["HAVE_MACH_O_NLIST_H"]
+                cpp.includePaths: commonIncludePaths.concat([product.sourceDirectory + "/src/common/mac"])
+                cpp.defines: commonDefines.concat(["HAVE_MACH_O_NLIST_H"])
             }
+            cpp.includePaths: commonIncludePaths
+            cpp.defines: commonDefines
         }
     }
 

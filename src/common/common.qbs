@@ -4,8 +4,6 @@ StaticLibrary {
     name: "common"
 
     Depends { name: "default_cpp_config" }
-    
-    cpp.includePaths: ["../third_party/mac_headers"]
 
     files: [
         "convert_UTF.c",
@@ -76,5 +74,18 @@ StaticLibrary {
             "linux/symbol_upload.cc",
             "linux/synth_elf.cc",
         ]
+    }
+
+    Group {
+    	condition: qbs.targetOS.contains("macos")
+    	files: [
+    		"mac/arch_utilities.cc",
+    		"mac/dump_syms.cc",
+    		"mac/file_id.cc",
+    		"mac/macho_id.cc",
+    		"mac/macho_reader.cc",
+    		"mac/macho_utilities.cc",
+    		"mac/macho_walker.cc",
+    	]
     }
 }

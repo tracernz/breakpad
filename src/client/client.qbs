@@ -8,10 +8,6 @@ StaticLibrary {
 
     cpp.debugInformation: true
 
-    files: [
-        "minidump_file_writer.cc",
-    ]
-
     Group {
         fileTagsFilter: product.type
         qbs.install: true
@@ -32,12 +28,24 @@ StaticLibrary {
         qbs.install: true
         qbs.installDir: "include/breakpad/client/mac/handler"
     }
+
     Group {
-        name: "client_headers_win_handler"
-        files: "mac/handler/*.h"
+        files: "windows/handler/*.h"
         condition: qbs.targetOS.contains("windows")
         qbs.install: true
-        qbs.installDir: "include/breakpad/client/win/handler"
+        qbs.installDir: "include/breakpad/client/windows/handler"
+    }
+    Group {
+        files: "windows/common/*.h"
+        condition: qbs.targetOS.contains("windows")
+        qbs.install: true
+        qbs.installDir: "include/breakpad/client/windows/common"
+    }
+    Group {
+        files: "windows/crash_generation/*.h"
+        condition: qbs.targetOS.contains("windows")
+        qbs.install: true
+        qbs.installDir: "include/breakpad/client/windows/crash_generation"
     }
 
     Group {
@@ -51,6 +59,7 @@ StaticLibrary {
     Group {
         condition: qbs.targetOS.contains("linux")
         files: [
+            "minidump_file_writer.cc",
             "linux/crash_generation/crash_generation_client.cc",
             "linux/crash_generation/crash_generation_server.cc",
             "linux/dump_writer_common/thread_info.cc",
@@ -63,6 +72,18 @@ StaticLibrary {
             "linux/minidump_writer/linux_dumper.cc",
             "linux/minidump_writer/linux_ptrace_dumper.cc",
             "linux/minidump_writer/minidump_writer.cc",
+        ]
+    }
+
+    Group {
+        condition: qbs.targetOS.contains("windows")
+        files: [
+            "windows/crash_generation/client_info.cc",
+            "windows/crash_generation/crash_generation_client.cc",
+            "windows/crash_generation/crash_generation_server.cc",
+            "windows/crash_generation/minidump_generator.cc",
+            "windows/handler/exception_handler.cc",
+            "windows/sender/crash_report_sender.cc",
         ]
     }
 }

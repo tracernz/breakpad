@@ -7,23 +7,11 @@ StaticLibrary {
 
     files: [
         "convert_UTF.c",
-        "dwarf_cfi_to_module.cc",
-        "dwarf_cu_to_module.cc",
-        "dwarf_line_to_module.cc",
-        "language.cc",
         "md5.cc",
         "module.cc",
         "simple_string_dictionary.cc",
-        "stabs_reader.cc",
-        "stabs_to_module.cc",
         "string_conversion.cc",
         "test_assembler.cc",
-        "dwarf/bytereader.cc",
-        "dwarf/elf_reader.cc",
-        "dwarf/dwarf2reader.cc",
-        "dwarf/cfi_assembler.cc",
-        "dwarf/dwarf2diehandler.cc",
-        "dwarf/functioninfo.cc",
     ]
 
     Group {
@@ -53,6 +41,25 @@ StaticLibrary {
         condition: qbs.targetOS.contains("windows")
         qbs.install: true
         qbs.installDir: "include/breakpad/common/windows"
+    }
+
+
+    Group {
+        condition: qbs.targetOS.contains("linux") || qbs.targetOS.contains("macos")
+        files: [
+            "dwarf_cfi_to_module.cc",
+            "dwarf_cu_to_module.cc",
+            "dwarf_line_to_module.cc",
+            "language.cc",
+            "stabs_reader.cc",
+            "stabs_to_module.cc",
+            "dwarf/bytereader.cc",
+            "dwarf/elf_reader.cc",
+            "dwarf/dwarf2reader.cc",
+            "dwarf/cfi_assembler.cc",
+            "dwarf/dwarf2diehandler.cc",
+            "dwarf/functioninfo.cc",
+        ]
     }
 
     Group {
@@ -87,5 +94,17 @@ StaticLibrary {
     		"mac/macho_utilities.cc",
     		"mac/macho_walker.cc",
     	]
+    }
+
+    Group {
+        condition: qbs.targetOS.contains("windows")
+        files: [
+            "windows/dia_util.cc",
+            "windows/guid_string.cc",
+            "windows/http_upload.cc",
+            "windows/omap.cc",
+            "windows/pdb_source_line_writer.cc",
+            "windows/string_utils.cc",
+        ]
     }
 }

@@ -76,6 +76,20 @@ StaticLibrary {
     }
 
     Group {
+        condition: qbs.targetOS.contains("macos")
+        files: [
+            "minidump_file_writer.cc",
+            "mac/crash_generation/crash_generation_client.cc",
+            "mac/crash_generation/crash_generation_server.cc",
+            "mac/handler/breakpad_nlist_64.cc",
+            "mac/handler/dynamic_images.cc",
+            "mac/handler/exception_handler.cc",
+            "mac/handler/minidump_generator.cc",
+            "mac/handler/protected_memory_allocator.cc",
+        ]
+    }
+
+    Group {
         condition: qbs.targetOS.contains("windows")
         files: [
             "windows/crash_generation/client_info.cc",

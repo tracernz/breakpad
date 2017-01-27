@@ -11,3 +11,20 @@ build_script:
 
 after_build:
   - ps: tree dist
+
+artifacts:
+  - path: dist
+    name: dr-breakpad-msvc2015
+    type: zip
+
+deploy:
+  provider: GitHub
+  description: 'Automatic build'
+  auth_token:
+    secure: KLuY5bPgxI9oDFmmhNWEwpPWN/9cXEWtBHt6J5OQzCfA27FHravJLDFdSAfsbsJw
+  artifact: dr-breakpad-msvc2015.zip
+  draft: true
+  prerelease: false
+  force_update: true
+  on:
+    appveyor_repo_tag: true

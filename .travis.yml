@@ -13,7 +13,7 @@ before_script:
 matrix:
   include:
   - os: linux
-    env: QBS_PROFILE=gcc
+    env: QBS_PROFILE=gcc PATH=/opt/qt58/bin:$PATH
   - os: osx
     env: QBS_PROFILE=clang
 

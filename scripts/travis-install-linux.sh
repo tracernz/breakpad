@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-sudo add-apt-repository ppa:beineri/opt-qt58-trusty
-sudo apt-get update
-sudo apt-get install gcc-5 g++-5 tree qt58qbs
+sudo add-apt-repository -y ppa:beineri/opt-qt58-trusty
+sudo apt-get update -y
+sudo apt-get install -y gcc-5 g++-5 tree qt58qbs
 
 mkdir -p ~/bin
 ln -fs /usr/bin/gcc-5 ~/bin/gcc

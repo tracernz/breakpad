@@ -14,7 +14,7 @@ after_build:
 
 artifacts:
   - path: dist
-    name: dr-breakpad-msvc2015-%APPVEYOR_REPO_TAG_NAME%
+    name: dr-breakpad-msvc2015-$(APPVEYOR_REPO_TAG_NAME)
     type: zip
 
 deploy:
@@ -22,7 +22,7 @@ deploy:
   description: 'Automatic build'
   auth_token:
     secure: KLuY5bPgxI9oDFmmhNWEwpPWN/9cXEWtBHt6J5OQzCfA27FHravJLDFdSAfsbsJw
-  artifact: dr-breakpad-msvc2015-%APPVEYOR_REPO_TAG_NAME%.zip
+  artifact: dr-breakpad-msvc2015-$(APPVEYOR_REPO_TAG_NAME).zip
   draft: true
   prerelease: false
   force_update: true

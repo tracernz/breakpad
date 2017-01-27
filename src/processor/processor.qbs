@@ -31,10 +31,10 @@ Project {
 
     property stringList commonIncludePaths: ['../']
 
-    CppApplication {
+    BreakpadProduct {
+        type: ["application"]
         name: "minidump_stackwalk"
 
-        Depends { name: "default_cpp_app_config" }
         Depends { name: "libdisasm" }
 
         files: commonFiles.concat([
@@ -48,47 +48,26 @@ Project {
             "proc_maps_linux.cc",
             "symbolic_constants_win.cc",
         ])
-
-        Group {
-            fileTagsFilter: product.type
-            qbs.install: true
-            qbs.installDir: "bin"
-        }
     }
 
-    CppApplication {
-        name: "microdump_stackwalk"
-
-        Depends { name: "default_cpp_app_config" }
+    BreakpadProduct {
+        type: ["application"]
 
         files: commonFiles.concat([
             "microdump.cc",
             "microdump_processor.cc",
             "microdump_stackwalk.cc",
         ])
-
-        Group {
-            fileTagsFilter: product.type
-            qbs.install: true
-            qbs.installDir: "bin"
-        }
     }
 
-    CppApplication {
+    BreakpadProduct {
+        type: ["application"]
         name: "minidump_dump"
-
-        Depends { name: "default_cpp_app_config" }
 
         files: commonFiles.concat([
             "minidump.cc",
             "minidump_dump.cc",
             "proc_maps_linux.cc",
         ])
-
-        Group {
-            fileTagsFilter: product.type
-            qbs.install: true
-            qbs.installDir: "bin"
-        }
     }
 }

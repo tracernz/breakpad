@@ -1,12 +1,19 @@
 import qbs 1.0
 
-StaticLibrary {
+BreakpadProduct {
+    type: "staticlibrary"
     name: "breakpad_client"
 
-    Depends { name: "default_cpp_config" }
-    Depends { name: "common" }
-
     cpp.debugInformation: true
+
+    Properties {
+        condition: !qbs.targetOS.contains("windows")
+        cpp.dynamicLibraries: 'pthread'
+    }
+
+    Group {
+        files: commonSource
+    }
 
     Group {
         fileTagsFilter: product.type
@@ -15,26 +22,55 @@ StaticLibrary {
     }
 
     Group {
-        name: "client_headers_linux_handler"
+        files: "linux/crash_generation/*.h"
+        condition: qbs.targetOS.contains("linux")
+        qbs.install: true
+        qbs.installDir: "include/breakpad/client/linux/crash_generation"
+    }
+    Group {
+        files: "linux/dump_writer_common/*.h"
+        condition: qbs.targetOS.contains("linux")
+        qbs.install: true
+        qbs.installDir: "include/breakpad/client/linux/dump_writer_common"
+    }
+    Group {
         files: "linux/handler/*.h"
         condition: qbs.targetOS.contains("linux")
         qbs.install: true
         qbs.installDir: "include/breakpad/client/linux/handler"
     }
     Group {
-        name: "client_headers_mac_handler"
+        files: "linux/minidump_writer/*.h"
+        condition: qbs.targetOS.contains("linux")
+        qbs.install: true
+        qbs.installDir: "include/breakpad/client/linux/minidump_writer"
+    }
+    Group {
+        files: "linux/microdump_writer/*.h"
+        condition: qbs.targetOS.contains("linux")
+        qbs.install: true
+        qbs.installDir: "include/breakpad/client/linux/microdump_writer"
+    }
+    Group {
+        files: "../third_party/lss/*.h"
+        condition: qbs.targetOS.contains("linux")
+        qbs.install: true
+        qbs.installDir: "include/breakpad/third_party/lss"
+    }
+
+    Group {
+        files: "mac/crash_generation/*.h"
+        condition: qbs.targetOS.contains("macos")
+        qbs.install: true
+        qbs.installDir: "include/breakpad/client/mac/crash_generation"
+    }
+    Group {
         files: "mac/handler/*.h"
         condition: qbs.targetOS.contains("macos")
         qbs.install: true
         qbs.installDir: "include/breakpad/client/mac/handler"
     }
 
-    Group {
-        files: "windows/handler/*.h"
-        condition: qbs.targetOS.contains("windows")
-        qbs.install: true
-        qbs.installDir: "include/breakpad/client/windows/handler"
-    }
     Group {
         files: "windows/common/*.h"
         condition: qbs.targetOS.contains("windows")
@@ -47,13 +83,11 @@ StaticLibrary {
         qbs.install: true
         qbs.installDir: "include/breakpad/client/windows/crash_generation"
     }
-
     Group {
-        name: "client_headers_linux_crash_generation"
-        files: "linux/crash_generation/*.h"
-        condition: qbs.targetOS.contains("linux")
+        files: "windows/handler/*.h"
+        condition: qbs.targetOS.contains("windows")
         qbs.install: true
-        qbs.installDir: "include/breakpad/client/linux/crash_generation"
+        qbs.installDir: "include/breakpad/client/windows/handler"
     }
 
     Group {

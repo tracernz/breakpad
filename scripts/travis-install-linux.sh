@@ -14,7 +14,6 @@ ln -fs /usr/bin/g++-5 ~/bin/g++
 gcc --version
 g++ --version
 
-
-source /opt/qt58/bin/qt58-env.sh
+export PATH=/opt/qt58/bin:$PATH
 
 exit 0

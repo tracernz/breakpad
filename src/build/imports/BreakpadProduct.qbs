@@ -1,4 +1,5 @@
 import qbs
+import qbs.FileInfo
 
 Product {
     Depends { name: "cpp" }

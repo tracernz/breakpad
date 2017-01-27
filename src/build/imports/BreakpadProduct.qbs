@@ -8,6 +8,7 @@ Product {
     property bool installable: true
 
     cpp.cxxLanguageVersion: "c++11"
+    cpp.minimumMacosVersion: "10.9"
 
     Properties {
         condition: qbs.targetOS.contains("linux")
@@ -81,13 +82,16 @@ Product {
 
         if (qbs.targetOS.contains("macos")) {
             files = files.concat([
+                "mac/MachIPC.mm",
                 "mac/arch_utilities.cc",
+                "mac/bootstrap_compat.cc",
                 "mac/dump_syms.cc",
                 "mac/file_id.cc",
                 "mac/macho_id.cc",
                 "mac/macho_reader.cc",
                 "mac/macho_utilities.cc",
                 "mac/macho_walker.cc",
+                "mac/string_utilities.cc",
             ]);
         }
 

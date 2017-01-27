@@ -10,7 +10,7 @@ build_script:
   - qbs install profile:MSVC2015-x86 release qbs.installRoot:dist
 
 after_build:
-  - ps: tree dist
+  - ps: tree /F dist
 
 artifacts:
   - path: dist

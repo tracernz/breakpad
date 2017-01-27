@@ -1,0 +1,13 @@
+image: Visual Studio 2015
+shallow_clone: true
+clone_depth: 1
+
+install:
+  - cinst qbs
+  - qbs setup-toolchains --detect
+
+build_script:
+  - qbs install profile:MSVC2015-x86 release qbs.installRoot:dist
+
+after_build:
+  - ps: tree dist

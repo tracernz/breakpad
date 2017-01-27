@@ -21,14 +21,14 @@ script:
 - tree ./dist
 
 after_success:
-- pushd dist && tar -cvJf dr-breakpad-${TRAVIS_OS_NAME}.tar.xz * ; popd
+- pushd dist && tar -cvJf ${TRAVIS_BUILD_DIR}/dist/dr-breakpad-${TRAVIS_OS_NAME}-${TRAVIS_TAG}.tar.xz * ; popd
 
 deploy:
   skip_cleanup: true
   provider: releases
   api_key:
     secure: WSfFtMJOaJlRy3ryWb/sLH+yzrzZ8YQQAwJuBemTfwHu6qTJbJEZLbehVsdAn3aaGGci+P/OBoe2rpMrOQsjd2AniwtnUZUlERJHLAqZM2K3QKc7cDRfo9g+AEoenVNflnw5+GWtSCTRW7GcVc7s5iTtbumtiNz/uVJCV11pdfLkDMlsos1mXnfiIS77i+oLAQ+xXNLTvaUJ2eitxjTsD+MMq/7E+iPYNrbd83fW4eu/dfBO11X5iD4tS6SQaefNYoeLfj3QInufM917y/4spx6aslHCWdcRlW3pw5BolDfLSwDDIYa7pmM5x6/pkSqZoQXlMm/1RwJoHIp5NMNwUQhaYtC9xn0uj8sKNzw7GcHFiLn5SNaiyXRSsPmimka/RY4QfRprAIa3v5jAZGFWFyF1PVKt3A9yPXR91IHcqKMgpIHONlgInyx5jhIzdKi+oMBR5+PYI6DKiMX6dvyBYFttdQrubCKe2n82fzxQrFEI7VbX6iJpu9FQLNboUCfzo3UUbs0sRjsNJXWPS4Any/FCc7L+7QaBUrnVv0yX88VFlwGCq2WY6R4U4OCmZXS1Z6oiODEI3TuV+2Bv7jYZ19g5kBZEv/HCBubasX+FkgLZt8PrWjuvY01EZfvIL5cPoakDz0E06IhGRTwZUD+ztua5e5ojDSVUpR8AfpcB+P8=
-  file: ${TRAVIS_BUILD_DIR}/dist/dr-breakpad-${TRAVIS_OS_NAME}.tar.xz
+  file: ${TRAVIS_BUILD_DIR}/dist/dr-breakpad-${TRAVIS_OS_NAME}-${TRAVIS_TAG}.tar.xz
   on:
     repo: tracernz/breakpad
     tags: true

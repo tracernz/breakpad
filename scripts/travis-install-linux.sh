@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -eo pipefail
 
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo add-apt-repository -y ppa:beineri/opt-qt58-trusty
@@ -13,6 +13,7 @@ ln -fs /usr/bin/g++-5 ~/bin/g++
 
 gcc --version
 g++ --version
+
 
 source /opt/qt58/bin/qt58-env.sh
 

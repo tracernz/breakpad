@@ -1991,6 +1991,10 @@ string MinidumpModule::debug_file() const {
           file = *new_file;
         }
       }
+    } else if (minidump_->GetSystemInfo()->GetOS() == "windows") {
+      // pretty sloppy but will be okay for now
+      auto const sep = name_->find_last_of('.');
+      file = name_->substr(0, sep + 1) + "pdb";
     }
   }
 
@@ -2073,6 +2077,9 @@ string MinidumpModule::debug_identifier() const {
                       sizeof(MDGUID)));
       identifier = guid_and_age_to_debug_id(guid, 0);
     }
+  } else if (minidump_->GetSystemInfo()->GetOS() == "windows") {
+    // this is what MSVS uses if CodeView record is not present
+    identifier = code_identifier();
   }
 
   // TODO(mmentovai): if there's no usable CodeView record, there might be a

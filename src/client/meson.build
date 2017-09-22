@@ -46,6 +46,6 @@ endif
 install_headers()
 
 client_so = shared_library('breakpad_client', src, version : '1.0.0', soversion : '0',
-  dependencies: deps, include_directories: main_includes, link_with: common)
+  dependencies: deps, include_directories: main_includes, link_with: common, install : true)
 client_a = static_library('breakpad_client', src, version : '1.0.0', soversion : '0',
-  dependencies: deps, pic: true, include_directories: main_includes, link_with: common)
+  dependencies: deps, pic: true, include_directories: main_includes, link_with: common, install : true)
